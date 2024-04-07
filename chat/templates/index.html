@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>Chat Rooms</title>
-            <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f2f2f2; /* Nice light grey background */
@@ -56,9 +56,19 @@
     </style>
 </head>
 <body>
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+    <div class="container">
+        <h1>Enter Chat Room</h1>
+        <form method="POST">
+<!--        <label for="room-name-input">Room Name:</label><br>-->
+<!--        <input id="room-name-input" type="text" size="50"><br><br>-->
+<!--        <label for="user-name-input">Your Name:</label><br>-->
+<!--        <input id="user-name-input" type="text" size="50"><br><br>-->
+<!--        <input id="room-name-submit" type="button" value="Enter">-->
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="room-name-submit" type="submit" value="Submit">Submit</button>
+        </form>
+    </div>
 
     <script>
         document.querySelector('#room-name-input').focus();
@@ -70,7 +80,8 @@
 
         document.querySelector('#room-name-submit').onclick = function(e) {
             var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
+            var userName = document.querySelector('#user-name-input').value;
+            // You can do something with both roomName and userName
         };
     </script>
 </body>
